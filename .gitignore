@@ -39,3 +39,7 @@ next-env.d.ts
 
 *.jpg
 *.webp
+
+# Ignore env files
+
+*.env

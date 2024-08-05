@@ -1,13 +1,17 @@
 import { Post } from "@/components/post";
-import { postsData } from "@/data/posts-data";
+import { db } from "@/db/drizzle";
+import { posts } from "@/db/schema";
 
-export default function Home() {
+export default async function Home() {
+  const newPosts = await db.select().from(posts);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {/* Posts UI */}
       <div className="grid grid-cols-3 gap-6">
-        {postsData.map((post, index) => (
+        {newPosts.map((post, index) => (
           <div key={index}>
+            {/* @ts-ignore */}
             <Post post={post} />
           </div>
         ))}

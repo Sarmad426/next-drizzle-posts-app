@@ -1,17 +1,21 @@
 "use client";
 
-import { Plus } from "lucide-react";
+import { useEffect, useState } from "react";
+
+import { NewPostDialog } from "./new-post-dialog";
 
 export const Navbar = () => {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   return (
     <nav className="flex items-center justify-end mt-6 mb-2 w-[90%]">
-      <button
-        title="Create new post"
-        className="bg-gray-700 text-white rounded p-2 hover:bg-gray-600 transition-colors duration-300 ease-linear"
-        // onClick={handleNewPostModal}
-      >
-        <Plus />
-      </button>
+      <NewPostDialog />
     </nav>
   );
 };

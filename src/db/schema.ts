@@ -1,7 +1,13 @@
-import { pgTable, serial, varchar, text, uuid, } from "drizzle-orm/pg-core";
+// import { pgTable, serial, varchar, text, uuid, } from "drizzle-orm/pg-core";
 
-export const posts = pgTable('posts', {
-    id: serial('id').primaryKey(),
-    title: varchar('title', { length: 255 }).notNull(),
+import {
+    sqliteTable,
+    integer,
+    text
+} from 'drizzle-orm/sqlite-core'
+
+export const posts = sqliteTable('posts', {
+    id: integer('id').primaryKey(),
+    title: text('title').notNull(),
     description: text('description').notNull(),
 })

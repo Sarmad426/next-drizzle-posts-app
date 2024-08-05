@@ -9,6 +9,9 @@ export default async function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
       {/* Posts UI */}
+      {newPosts.length === 0 && (
+        <span className="text-secondary-foreground">No posts yet.</span>
+      )}
       <div className="grid grid-cols-3 gap-6">
         {newPosts.map((post, index) => (
           <div key={index}>

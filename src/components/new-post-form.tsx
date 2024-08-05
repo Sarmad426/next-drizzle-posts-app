@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { DialogClose } from "./ui/dialog";
 import { createNewPost } from "@/actions/post-actions";
 import { useRouter } from "next/navigation";
+import { Textarea } from "./ui/textarea";
 
 export const NewPostForm = () => {
   const [isPending, startTransition] = useTransition();
@@ -51,15 +52,14 @@ export const NewPostForm = () => {
       </div>
       <div className="my-3">
         <Label htmlFor="description">Describe what you mean?</Label>
-        <textarea
+        <Textarea
           name="description"
           id="description"
-          title="Post details"
           rows={8}
           cols={50}
           className="border-2 rounded-md p-2"
           disabled={isPending}
-        ></textarea>
+        ></Textarea>
       </div>
       <span className="text-red-500 text-xs">{error}</span>
       {!error && <span className="text-teal-600 text-xs">{success}</span>}

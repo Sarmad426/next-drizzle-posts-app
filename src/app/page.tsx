@@ -1,4 +1,5 @@
 import { Post } from "@/components/post";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 import { db } from "@/db/drizzle";
 import { posts } from "@/db/schema";
 

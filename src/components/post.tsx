@@ -1,14 +1,20 @@
 "use client";
 
-import { IPostsData } from "@/data/posts-data";
-import { ThumbsDown, ThumbsUp } from "lucide-react";
-import Image from "next/image";
-import { useState } from "react";
+// import { IPostsData } from "@/data/posts-data";
+import { posts } from "@/db/schema";
+import { Trash } from "lucide-react";
+// import Image from "next/image";
+// import { useState } from "react";
+import { Button } from "./ui/button";
+import { useRouter } from "next/navigation";
+import { deletePost } from "@/actions/post-actions";
 
-export const Post = ({ post }: { post: IPostsData }) => {
+export const Post = ({ post }: { post: typeof posts }) => {
+  const router = useRouter();
+
+  /*
   const [likePost, setLikePost] = useState<boolean>(false);
   const [disLikePost, setDisLikePost] = useState<boolean>(false);
-
   const handleLike = () => {
     setLikePost(!likePost);
     setDisLikePost(false);
@@ -24,16 +30,24 @@ export const Post = ({ post }: { post: IPostsData }) => {
     count++;
     return count;
   };
+  */
+
+  const handlePostDelete = (id: number) => {
+    deletePost(id);
+    router.refresh();
+  };
 
   return (
-    <div className="dark:bg-gray-800 bg-white px-4 py-3 rounded-md col-span-1">
+    <div className="dark:bg-gray-800 bg-white px-4 py-3 rounded-md col-span-1 relative">
       <h3 className="dark:text-gray-200 text-gray-800 text-lg font-semibold text-center">
+        {/* @ts-ignore */}
         {post.title}
       </h3>
-      <p className="dark:text-gray-300 text-gray-700 my-3">
+      <p className="dark:text-gray-300 text-gray-600 text-sm my-3">
+        {/* @ts-ignore */}
         {post.description}
       </p>
-      <div className="flex items-center justify-between">
+      {/* <div className="flex items-center justify-between">
         <div className="flex flex-col gap-2">
           <Image
             src={`/${post.author.profileImg}`}
@@ -60,7 +74,17 @@ export const Post = ({ post }: { post: IPostsData }) => {
             <span className="text-xs text-gray-400">{post.dislikes}</span>
           </button>
         </div>
-      </div>
+      </div> */}
+      <Button
+        title="Delete post"
+        size="sm"
+        className="absolute right-1 top-2"
+        variant="ghost"
+        // @ts-ignore
+        onClick={() => handlePostDelete(post.id)}
+      >
+        <Trash className="w-4 text-red-400 hover:text-red-600" />
+      </Button>
     </div>
   );
 };

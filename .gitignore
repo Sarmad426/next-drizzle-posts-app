@@ -43,3 +43,6 @@ next-env.d.ts
 # Ignore env files
 
 *.env
+
+#Ignore sqlite files
+*.sqlite
